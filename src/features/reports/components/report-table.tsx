@@ -7,6 +7,15 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { MoreHorizontal } from 'lucide-react'
 
 const reports = [
   {
@@ -48,32 +57,53 @@ const reports = [
 
 export function ReportTable() {
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Report ID</TableHead>
-          <TableHead>Nombre</TableHead>
-          <TableHead>Tipo</TableHead>
-          <TableHead>Fecha</TableHead>
-          <TableHead>Estado</TableHead>
-          <TableHead className="text-right">Acción</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {reports.map((report) => (
-          <TableRow key={report.id}>
-            <TableCell className="font-medium">{report.id}</TableCell>
-            <TableCell>{report.name}</TableCell>
-            <TableCell>{report.type}</TableCell>
-            <TableCell>{report.date}</TableCell>
-            <TableCell>{report.status}</TableCell>
-            <TableCell className="text-right">
-              <Button variant="outline">Descargar</Button>
-            </TableCell>
+    <div className="w-full overflow-auto">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Report ID</TableHead>
+            <TableHead>Nombre</TableHead>
+            <TableHead className="hidden md:table-cell">Tipo</TableHead>
+            <TableHead className="hidden md:table-cell">Fecha</TableHead>
+            <TableHead className="hidden md:table-cell">Estado</TableHead>
+            <TableHead className="text-right">Acciones</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {reports.map((report) => (
+            <TableRow key={report.id}>
+              <TableCell className="font-medium">{report.id}</TableCell>
+              <TableCell>{report.name}</TableCell>
+              <TableCell className="hidden md:table-cell">{report.type}</TableCell>
+              <TableCell className="hidden md:table-cell">{report.date}</TableCell>
+              <TableCell className="hidden md:table-cell">{report.status}</TableCell>
+              <TableCell className="text-right">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="h-8 w-8 p-0">
+                      <span className="sr-only">Abrir menú</span>
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+                    <DropdownMenuItem
+                      onClick={() => navigator.clipboard.writeText(report.id)}
+                    >
+                      Copiar ID de informe
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Ver informe</DropdownMenuItem>
+                    <DropdownMenuItem>Descargar PDF</DropdownMenuItem>
+                    <DropdownMenuItem>Enviar por correo</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   )
 }
 
