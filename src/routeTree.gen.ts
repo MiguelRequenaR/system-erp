@@ -37,6 +37,9 @@ const AuthenticatedSettingsRouteLazyImport = createFileRoute(
 const AuthenticatedReportsRouteLazyImport = createFileRoute(
   '/_authenticated/reports',
 )()
+const AuthenticatedHelpCenterRouteLazyImport = createFileRoute(
+  '/_authenticated/help-center',
+)()
 const AuthenticatedCampaignRouteLazyImport = createFileRoute(
   '/_authenticated/campaign',
 )()
@@ -174,6 +177,17 @@ const AuthenticatedReportsRouteLazyRoute =
     import('./routes/_authenticated/reports/route.lazy').then((d) => d.Route),
   )
 
+const AuthenticatedHelpCenterRouteLazyRoute =
+  AuthenticatedHelpCenterRouteLazyImport.update({
+    id: '/help-center',
+    path: '/help-center',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/help-center/route.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
 const AuthenticatedCampaignRouteLazyRoute =
   AuthenticatedCampaignRouteLazyImport.update({
     id: '/campaign',
@@ -239,9 +253,9 @@ const AuthenticatedReportsIndexLazyRoute =
 
 const AuthenticatedHelpCenterIndexLazyRoute =
   AuthenticatedHelpCenterIndexLazyImport.update({
-    id: '/help-center/',
-    path: '/help-center/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedHelpCenterRouteLazyRoute,
   } as any).lazy(() =>
     import('./routes/_authenticated/help-center/index.lazy').then(
       (d) => d.Route,
@@ -357,6 +371,13 @@ declare module '@tanstack/react-router' {
       path: '/campaign'
       fullPath: '/campaign'
       preLoaderRoute: typeof AuthenticatedCampaignRouteLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/help-center': {
+      id: '/_authenticated/help-center'
+      path: '/help-center'
+      fullPath: '/help-center'
+      preLoaderRoute: typeof AuthenticatedHelpCenterRouteLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/reports': {
@@ -487,10 +508,10 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/help-center/': {
       id: '/_authenticated/help-center/'
-      path: '/help-center'
-      fullPath: '/help-center'
+      path: '/'
+      fullPath: '/help-center/'
       preLoaderRoute: typeof AuthenticatedHelpCenterIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof AuthenticatedHelpCenterRouteLazyImport
     }
     '/_authenticated/reports/': {
       id: '/_authenticated/reports/'
@@ -539,6 +560,21 @@ const AuthenticatedCampaignRouteLazyRouteWithChildren =
     AuthenticatedCampaignRouteLazyRouteChildren,
   )
 
+interface AuthenticatedHelpCenterRouteLazyRouteChildren {
+  AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
+}
+
+const AuthenticatedHelpCenterRouteLazyRouteChildren: AuthenticatedHelpCenterRouteLazyRouteChildren =
+  {
+    AuthenticatedHelpCenterIndexLazyRoute:
+      AuthenticatedHelpCenterIndexLazyRoute,
+  }
+
+const AuthenticatedHelpCenterRouteLazyRouteWithChildren =
+  AuthenticatedHelpCenterRouteLazyRoute._addFileChildren(
+    AuthenticatedHelpCenterRouteLazyRouteChildren,
+  )
+
 interface AuthenticatedReportsRouteLazyRouteChildren {
   AuthenticatedReportsIndexLazyRoute: typeof AuthenticatedReportsIndexLazyRoute
 }
@@ -581,12 +617,12 @@ const AuthenticatedSettingsRouteLazyRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCampaignRouteLazyRoute: typeof AuthenticatedCampaignRouteLazyRouteWithChildren
+  AuthenticatedHelpCenterRouteLazyRoute: typeof AuthenticatedHelpCenterRouteLazyRouteWithChildren
   AuthenticatedReportsRouteLazyRoute: typeof AuthenticatedReportsRouteLazyRouteWithChildren
   AuthenticatedSettingsRouteLazyRoute: typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedAppsIndexLazyRoute: typeof AuthenticatedAppsIndexLazyRoute
   AuthenticatedChatsIndexLazyRoute: typeof AuthenticatedChatsIndexLazyRoute
-  AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
   AuthenticatedTasksIndexLazyRoute: typeof AuthenticatedTasksIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
 }
@@ -594,6 +630,8 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCampaignRouteLazyRoute:
     AuthenticatedCampaignRouteLazyRouteWithChildren,
+  AuthenticatedHelpCenterRouteLazyRoute:
+    AuthenticatedHelpCenterRouteLazyRouteWithChildren,
   AuthenticatedReportsRouteLazyRoute:
     AuthenticatedReportsRouteLazyRouteWithChildren,
   AuthenticatedSettingsRouteLazyRoute:
@@ -601,7 +639,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAppsIndexLazyRoute: AuthenticatedAppsIndexLazyRoute,
   AuthenticatedChatsIndexLazyRoute: AuthenticatedChatsIndexLazyRoute,
-  AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
   AuthenticatedTasksIndexLazyRoute: AuthenticatedTasksIndexLazyRoute,
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
 }
@@ -615,6 +652,7 @@ export interface FileRoutesByFullPath {
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
   '/campaign': typeof AuthenticatedCampaignRouteLazyRouteWithChildren
+  '/help-center': typeof AuthenticatedHelpCenterRouteLazyRouteWithChildren
   '/reports': typeof AuthenticatedReportsRouteLazyRouteWithChildren
   '/settings': typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   '/forgot-password': typeof authForgotPasswordLazyRoute
@@ -632,7 +670,7 @@ export interface FileRoutesByFullPath {
   '/apps': typeof AuthenticatedAppsIndexLazyRoute
   '/campaign/': typeof AuthenticatedCampaignIndexLazyRoute
   '/chats': typeof AuthenticatedChatsIndexLazyRoute
-  '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
+  '/help-center/': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/reports/': typeof AuthenticatedReportsIndexLazyRoute
   '/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
@@ -672,6 +710,7 @@ export interface FileRoutesById {
   '/(auth)/otp': typeof authOtpRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/_authenticated/campaign': typeof AuthenticatedCampaignRouteLazyRouteWithChildren
+  '/_authenticated/help-center': typeof AuthenticatedHelpCenterRouteLazyRouteWithChildren
   '/_authenticated/reports': typeof AuthenticatedReportsRouteLazyRouteWithChildren
   '/_authenticated/settings': typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
@@ -705,6 +744,7 @@ export interface FileRouteTypes {
     | '/otp'
     | '/sign-in'
     | '/campaign'
+    | '/help-center'
     | '/reports'
     | '/settings'
     | '/forgot-password'
@@ -722,7 +762,7 @@ export interface FileRouteTypes {
     | '/apps'
     | '/campaign/'
     | '/chats'
-    | '/help-center'
+    | '/help-center/'
     | '/reports/'
     | '/settings/'
     | '/tasks'
@@ -759,6 +799,7 @@ export interface FileRouteTypes {
     | '/(auth)/otp'
     | '/(auth)/sign-in'
     | '/_authenticated/campaign'
+    | '/_authenticated/help-center'
     | '/_authenticated/reports'
     | '/_authenticated/settings'
     | '/(auth)/forgot-password'
@@ -843,12 +884,12 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/route.tsx",
       "children": [
         "/_authenticated/campaign",
+        "/_authenticated/help-center",
         "/_authenticated/reports",
         "/_authenticated/settings",
         "/_authenticated/",
         "/_authenticated/apps/",
         "/_authenticated/chats/",
-        "/_authenticated/help-center/",
         "/_authenticated/tasks/",
         "/_authenticated/users/"
       ]
@@ -867,6 +908,13 @@ export const routeTree = rootRoute
       "parent": "/_authenticated",
       "children": [
         "/_authenticated/campaign/"
+      ]
+    },
+    "/_authenticated/help-center": {
+      "filePath": "_authenticated/help-center/route.lazy.tsx",
+      "parent": "/_authenticated",
+      "children": [
+        "/_authenticated/help-center/"
       ]
     },
     "/_authenticated/reports": {
@@ -945,7 +993,7 @@ export const routeTree = rootRoute
     },
     "/_authenticated/help-center/": {
       "filePath": "_authenticated/help-center/index.lazy.tsx",
-      "parent": "/_authenticated"
+      "parent": "/_authenticated/help-center"
     },
     "/_authenticated/reports/": {
       "filePath": "_authenticated/reports/index.lazy.tsx",
