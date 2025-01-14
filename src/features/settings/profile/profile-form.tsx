@@ -90,13 +90,12 @@ export default function ProfileForm() {
           name='username'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Nombre de Usuario</FormLabel>
               <FormControl>
                 <Input placeholder='shadcn' {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name. It can be your real name or a
-                pseudonym. You can only change this once every 30 days.
+                Puede ser tu nombre real o un nombre de usuario. Solo puedes cambiar esto una vez cada 30 días.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -121,8 +120,8 @@ export default function ProfileForm() {
                 </SelectContent>
               </Select>
               <FormDescription>
-                You can manage verified email addresses in your{' '}
-                <Link to='/'>email settings</Link>.
+                Puedes administrar direcciones de correo electrónico verificadas en tu{' '}
+                <Link to='/'>configuración de correo electrónico</Link>.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -133,7 +132,7 @@ export default function ProfileForm() {
           name='bio'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bio</FormLabel>
+              <FormLabel>Descripción</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder='Tell us a little bit about yourself'
@@ -142,8 +141,7 @@ export default function ProfileForm() {
                 />
               </FormControl>
               <FormDescription>
-                You can <span>@mention</span> other users and organizations to
-                link to them.
+                Puedes <span>@mencionar</span> a otros usuarios y organizaciones para enlazarlos.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -161,7 +159,7 @@ export default function ProfileForm() {
                     URLs
                   </FormLabel>
                   <FormDescription className={cn(index !== 0 && 'sr-only')}>
-                    Add links to your website, blog, or social media profiles.
+                    Agrega enlaces a tu sitio web, blog o perfil de redes sociales.
                   </FormDescription>
                   <FormControl>
                     <Input {...field} />
@@ -178,10 +176,10 @@ export default function ProfileForm() {
             className='mt-2'
             onClick={() => append({ value: '' })}
           >
-            Add URL
+            Agregar URL
           </Button>
         </div>
-        <Button type='submit'>Update profile</Button>
+        <Button type='submit'>Actualizar perfil</Button>
       </form>
     </Form>
   )

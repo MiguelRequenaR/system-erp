@@ -48,7 +48,7 @@ const formSchema = z
       if (password === '') {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Password is required.',
+          message: 'Contraseña requerida.',
           path: ['password'],
         })
       }
@@ -56,7 +56,7 @@ const formSchema = z
       if (password.length < 8) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Password must be at least 8 characters long.',
+          message: 'La contraseña debe tener al menos 8 caracteres.',
           path: ['password'],
         })
       }
@@ -64,7 +64,7 @@ const formSchema = z
       if (!password.match(/[a-z]/)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Password must contain at least one lowercase letter.',
+          message: 'La contraseña debe contener al menos una letra minúscula.',
           path: ['password'],
         })
       }
@@ -72,7 +72,7 @@ const formSchema = z
       if (!password.match(/\d/)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Password must contain at least one number.',
+          message: 'La contraseña debe contener al menos un número.',
           path: ['password'],
         })
       }
@@ -80,7 +80,7 @@ const formSchema = z
       if (password !== confirmPassword) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Passwords don't match.",
+          message: "Las contraseñas no coinciden.",
           path: ['confirmPassword'],
         })
       }
@@ -143,10 +143,10 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
     >
       <DialogContent className='sm:max-w-lg'>
         <DialogHeader className='text-left'>
-          <DialogTitle>{isEdit ? 'Edit User' : 'Add New User'}</DialogTitle>
+          <DialogTitle>{isEdit ? 'Editar Usuario' : 'Agregar Usuario'}</DialogTitle>
           <DialogDescription>
-            {isEdit ? 'Update the user here. ' : 'Create new user here. '}
-            Click save when you&apos;re done.
+            {isEdit ? 'Actualizar usuario. ' : 'Crea un nuevo usuario. '}
+            Haga clic en guardar cuando termine.
           </DialogDescription>
         </DialogHeader>
         <ScrollArea className='h-[26.25rem] w-full pr-4 -mr-4 py-1'>
@@ -162,7 +162,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
                     <FormLabel className='col-span-2 text-right'>
-                      First Name
+                      Nombres
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -182,7 +182,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
                     <FormLabel className='col-span-2 text-right'>
-                      Last Name
+                      Apellidos
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -202,7 +202,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
                     <FormLabel className='col-span-2 text-right'>
-                      Username
+                      Nombre de Usuario
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -240,7 +240,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
                     <FormLabel className='col-span-2 text-right'>
-                      Phone Number
+                      Número de Teléfono
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -259,12 +259,12 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
                     <FormLabel className='col-span-2 text-right'>
-                      Role
+                      Rol
                     </FormLabel>
                     <SelectDropdown
                       defaultValue={field.value}
                       onValueChange={field.onChange}
-                      placeholder='Select a role'
+                      placeholder='Seleccione un rol'
                       className='col-span-4'
                       items={userTypes.map(({ label, value }) => ({
                         label,
@@ -281,7 +281,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
                     <FormLabel className='col-span-2 text-right'>
-                      Password
+                      Contraseña
                     </FormLabel>
                     <FormControl>
                       <PasswordInput
@@ -300,7 +300,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
                     <FormLabel className='col-span-2 text-right'>
-                      Confirm Password
+                      Confirmar Contraseña
                     </FormLabel>
                     <FormControl>
                       <PasswordInput
@@ -319,7 +319,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
         </ScrollArea>
         <DialogFooter>
           <Button type='submit' form='user-form'>
-            Save changes
+            Guardar
           </Button>
         </DialogFooter>
       </DialogContent>

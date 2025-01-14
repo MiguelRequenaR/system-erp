@@ -46,35 +46,35 @@ export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
             className='mr-1 inline-block stroke-destructive'
             size={18}
           />{' '}
-          Delete User
+          Eliminar Usuario
         </span>
       }
       desc={
         <div className='space-y-4'>
           <p className='mb-2'>
-            Are you sure you want to delete{' '}
+            Estas seguro de eliminar a {' '}
             <span className='font-bold'>{currentRow.username}</span>?
             <br />
-            This action will permanently remove the user with the role of{' '}
+            Esta acción eliminara permanentemente al usuario con el rol de {' '}
             <span className='font-bold'>
               {currentRow.role.toUpperCase()}
             </span>{' '}
-            from the system. This cannot be undone.
+            del sistema. Esta acción no se puede deshacer.
           </p>
 
           <Label className='my-2'>
-            Username:
+            Nombre de Usuario:
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder='Enter username to confirm deletion.'
+              placeholder='Ingresa el nombre de usuario para confirmar la eliminación.'
             />
           </Label>
 
           <Alert variant='destructive'>
-            <AlertTitle>Warning!</AlertTitle>
+            <AlertTitle>Peligro!</AlertTitle>
             <AlertDescription>
-              Please be carefull, this operation can not be rolled back.
+              Esta acción no se puede deshacer. Todos los datos del usuario serán eliminados permanentemente.
             </AlertDescription>
           </Alert>
         </div>

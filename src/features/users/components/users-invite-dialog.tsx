@@ -71,11 +71,10 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
       <DialogContent className='sm:max-w-md'>
         <DialogHeader className='text-left'>
           <DialogTitle className='flex items-center gap-2'>
-            <IconMailPlus /> Invite User
+            <IconMailPlus /> Invitar Usuario
           </DialogTitle>
           <DialogDescription>
-            Invite new user to join your team by sending them an email
-            invitation. Assign a role to define their access level.
+            Invita a un usuario a unirse a tu equipo.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -106,11 +105,11 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
               name='role'
               render={({ field }) => (
                 <FormItem className='space-y-1'>
-                  <FormLabel>Role</FormLabel>
+                  <FormLabel>Rol</FormLabel>
                   <SelectDropdown
                     defaultValue={field.value}
                     onValueChange={field.onChange}
-                    placeholder='Select a role'
+                    placeholder='Selecciona un rol'
                     items={userTypes.map(({ label, value }) => ({
                       label,
                       value,
@@ -125,11 +124,11 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
               name='desc'
               render={({ field }) => (
                 <FormItem className=''>
-                  <FormLabel>Description (optional)</FormLabel>
+                  <FormLabel>Descripción (Opcional)</FormLabel>
                   <FormControl>
                     <Textarea
                       className='resize-none'
-                      placeholder='Add a personal note to your invitation (optional)'
+                      placeholder='Agrega una nota para la invitación. (Opcional)'
                       {...field}
                     />
                   </FormControl>
@@ -141,10 +140,10 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
         </Form>
         <DialogFooter className='gap-y-2'>
           <DialogClose asChild>
-            <Button variant='outline'>Cancel</Button>
+            <Button variant='outline'>Cancelar</Button>
           </DialogClose>
           <Button type='submit' form='user-invite-form'>
-            Invite <IconSend />
+            Invitar <IconSend />
           </Button>
         </DialogFooter>
       </DialogContent>
