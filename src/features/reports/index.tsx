@@ -1,10 +1,4 @@
-import {
-  IconBlocks,
-  IconFlag,
-  IconHeadset,
-  IconPhoneCall,
-} from '@tabler/icons-react'
-import { Button } from '@/components/ui/button'
+import { IconBlocks, IconFlag } from '@tabler/icons-react'
 import {
   Card,
   CardContent,
