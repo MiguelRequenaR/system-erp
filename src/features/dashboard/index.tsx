@@ -1,3 +1,10 @@
+import {
+  IconBellCheck,
+  IconChartCandle,
+  IconDownload,
+  IconFileChart,
+  IconNotification,
+} from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -30,7 +37,10 @@ export default function Dashboard() {
         <div className='mb-2 flex items-center justify-between space-y-2'>
           <h1 className='text-3xl font-bold tracking-tight'>Dashboard</h1>
           <div className='flex items-center space-x-2'>
-            <Button>Descargar</Button>
+            <Button>
+              Descargar
+              <IconDownload className='ml-2 h-4 w-4' />
+            </Button>
           </div>
         </div>
         <Tabs
@@ -41,15 +51,9 @@ export default function Dashboard() {
           <div className='w-full overflow-x-auto pb-2'>
             <TabsList>
               <TabsTrigger value='overview'>General</TabsTrigger>
-              <TabsTrigger value='analytics' disabled>
-                Analíticas
-              </TabsTrigger>
-              <TabsTrigger value='reports' disabled>
-                Reportes
-              </TabsTrigger>
-              <TabsTrigger value='notifications' disabled>
-                Notificaciones
-              </TabsTrigger>
+              <TabsTrigger value='analytics'>Analíticas</TabsTrigger>
+              <TabsTrigger value='reports'>Reportes</TabsTrigger>
+              <TabsTrigger value='notifications'>Notificaciones</TabsTrigger>
             </TabsList>
           </div>
           <TabsContent value='overview' className='space-y-4'>
@@ -108,7 +112,9 @@ export default function Dashboard() {
               </Card>
               <Card>
                 <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-                  <CardTitle className='text-sm font-medium'>Tasa de Clics (CTR)</CardTitle>
+                  <CardTitle className='text-sm font-medium'>
+                    Tasa de Clics (CTR)
+                  </CardTitle>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 24 24'
@@ -176,6 +182,30 @@ export default function Dashboard() {
                   <RecentSales />
                 </CardContent>
               </Card>
+            </div>
+          </TabsContent>
+          <TabsContent value='analytics' className='space-y-4 '>
+            <div className='m-auto flex  flex-col items-center justify-center gap-2 '>
+              <IconChartCandle size={72} color='gray' />
+              <h1 className='text-xl text-muted-foreground leading-tight'>
+                No hay plataformas conectadas para mostrar
+              </h1>
+            </div>
+          </TabsContent>
+          <TabsContent value='reports' className='space-y-4 '>
+            <div className='m-auto flex  flex-col items-center justify-center gap-2 '>
+              <IconFileChart size={72} color='gray' />
+              <h1 className='text-xl text-muted-foreground leading-tight'>
+                No hay plataformas conectadas para mostrar
+              </h1>
+            </div>
+          </TabsContent>
+          <TabsContent value='notifications' className='space-y-4 '>
+            <div className='m-auto flex  flex-col items-center justify-center gap-2 '>
+              <IconBellCheck size={72} color='gray' />
+              <h1 className='text-xl text-muted-foreground leading-tight'>
+                No hay plataformas conectadas para mostrar
+              </h1>
             </div>
           </TabsContent>
         </Tabs>

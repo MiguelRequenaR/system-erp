@@ -1,29 +1,31 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  useSidebar,
 } from '@/components/ui/sidebar'
 import { NavGroup } from '@/components/layout/nav-group'
-import { NavUser } from '@/components/layout/nav-user'
+import logo from '../../assets/logo.png'
 import { sidebarData } from './data/sidebar-data'
-import Logo from '../../assets/logo.png'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { state } = useSidebar()
   return (
-    <Sidebar collapsible='icon' variant='floating' {...props}>
+    <Sidebar collapsible='icon' variant='sidebar' {...props}>
       <SidebarHeader>
-        <img src={Logo} alt='Logo' className='' />
+        <div className='flex items-center justify-between w-fit gap-1 collapsed:flex-col'>
+          <img src={logo} alt='Logo' className='w-12' />
+          {state !== 'collapsed' && (
+            <span className='text-xl font-bold'>Trabajos Más</span>
+          )}
+        </div>
       </SidebarHeader>
       <SidebarContent>
         {sidebarData.navGroups.map((props) => (
           <NavGroup key={props.title} {...props} />
         ))}
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={sidebarData.user} />
-      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )

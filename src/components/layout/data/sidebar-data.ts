@@ -1,4 +1,5 @@
 import {
+  IconFlag,
   IconHelp,
   IconLayoutDashboard,
   IconReport,
@@ -35,8 +36,8 @@ export const sidebarData: SidebarData = {
         {
           title: 'Campañas',
           url: '/campaign',
-          icon: IconLayoutDashboard,
-        },        
+          icon: IconFlag,
+        },
         {
           title: 'Reportes',
           url: '/reports',
@@ -46,7 +47,7 @@ export const sidebarData: SidebarData = {
           title: 'Usuarios',
           url: '/users',
           icon: IconUsers,
-        }
+        },
       ],
     },
     {
