@@ -15,7 +15,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible='icon' variant='sidebar' {...props}>
       <SidebarHeader>
         <div className='flex items-center justify-between w-fit gap-1 collapsed:flex-col'>
-          <img src={logo} alt='Logo' className='w-12' />
+          <img src={logo} alt='Logo' className='w-12 dark:invert' />
           {state !== 'collapsed' && (
             <span className='text-xl font-bold'>Trabajos Más</span>
           )}
